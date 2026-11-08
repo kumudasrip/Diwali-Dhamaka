@@ -69,6 +69,7 @@ export const StreetHUD: React.FC<Props> = ({
   const selectedCracker = placedCrackers.find((c) => c.id === selectedCrackerId);
   const unlitCount = placedCrackers.filter((c) => c.state === 'unlit').length;
   const [showTip, setShowTip] = React.useState(false);
+  const [showMobileInventory, setShowMobileInventory] = React.useState(true);
 
   return (
     <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-2 sm:p-4 z-20">
@@ -241,8 +242,8 @@ export const StreetHUD: React.FC<Props> = ({
 
             {/* Instruction tooltip (toggleable, compact, dismissible) */}
             {showTip && (
-              <div className="flex items-center gap-2 bg-slate-950/95 border border-amber-400/80 px-2.5 py-1 rounded text-[11px] font-sans text-amber-100 shadow-xl pixel-box animate-fadeIn max-w-xs sm:max-w-md">
-                <span className="truncate">
+              <div className="street-tip flex items-start gap-2 bg-slate-950/95 border border-amber-400/80 px-2.5 py-1 rounded text-[11px] font-sans text-amber-100 shadow-xl pixel-box animate-fadeIn max-w-xs sm:max-w-md">
+                <span>
                   Place a cracker, equip your sparkler, and your character will light it and step back. Tap diyas for coins.
                 </span>
                 <button
@@ -293,8 +294,18 @@ export const StreetHUD: React.FC<Props> = ({
         </div>
 
         {/* Cracker Toolbar Shelves */}
+        <button
+          type="button"
+          onClick={() => setShowMobileInventory((visible) => !visible)}
+          className="mobile-inventory-toggle items-center justify-center gap-1 px-3 py-1.5 bg-slate-950/95 text-amber-300 border-2 border-amber-500/80 rounded-lg font-pixel text-[10px] pixel-box cursor-pointer"
+          aria-expanded={showMobileInventory}
+        >
+          <span>{showMobileInventory ? '▼' : '▲'} BOMBS</span>
+        </button>
+
+        {showMobileInventory && (
         <div className="street-inventory bg-slate-950/90 backdrop-blur-md border-2 border-amber-500/80 rounded-lg p-2 pixel-box">
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-amber-500">
+          <div className="street-inventory-scroll flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-amber-500">
             {crackerTypes.map((type) => {
               const count = inventory[type] || 0;
               const isSelected = activeCrackerType === type;
@@ -361,6 +372,7 @@ export const StreetHUD: React.FC<Props> = ({
             </div>
           )}
         </div>
+        )}
       </div>
     </div>
   );

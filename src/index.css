@@ -83,6 +83,10 @@
   animation: diya-flicker 1.8s infinite ease-in-out;
 }
 
+.mobile-inventory-toggle {
+  display: none;
+}
+
 /* Keep the street HUD usable on narrow phone screens. */
 @media (max-width: 640px) {
   .street-header {
@@ -141,14 +145,37 @@
 
   .street-action-buttons {
     justify-content: flex-end;
+    flex-wrap: wrap;
   }
 
   .street-dock {
     gap: 0.35rem;
   }
 
+  .street-tip {
+    width: min(100%, calc(100vw - 5rem));
+    max-width: none;
+    max-height: 5rem;
+    overflow-y: auto;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-inventory-toggle {
+    display: flex;
+    width: 100%;
+    min-height: 2rem;
+  }
+
   .street-inventory {
     padding: 0.35rem;
+  }
+
+  .street-inventory-scroll {
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
   }
 
   .street-placement-hint {
