@@ -78,3 +78,11 @@ npm run build
 ```
 
 The generated files are written to `dist/` and can be served by any static web host.
+
+## License
+
+Copyright © 2026 [Kumuda Sri P](https://github.com/kumudasrip). All rights reserved.
+
+This project is proprietary. The source code, artwork, game design, audio, and other
+project assets may not be copied, modified, reused, published, distributed, or
+commercially used without prior written permission from the author.
